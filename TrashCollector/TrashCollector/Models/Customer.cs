@@ -19,6 +19,10 @@ namespace TrashCollector.Models
         [Display(Name = "Pickup Day")]
         public string pickupDay { get; set; }
         [Display(Name = "Street Address")]
+        public bool pickupDateSelected { get; set; }
+        [Display(Name = "Special Pickup Date Selected")]
+        public string individualPickupDate { get; set; }
+        [Display(Name = "Individual Pickup Date")]
         public string streetAddress { get; set; }
         [Display(Name = "City")]
         public string city { get; set; }
