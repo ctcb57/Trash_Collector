@@ -74,7 +74,7 @@ namespace TrashCollector.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "UserName")]
+        [Display(Name = "User Name")]
         public string UserName { get; set; }
 
         [Required]
