@@ -16,6 +16,10 @@ namespace TrashCollector.Models
         public string password { get; set; }
         [Display(Name = "Zip Code")]
         public int zipCode { get; set; }
+        [Display(Name = "First Name")]
+        public string firstName { get; set; }
+        [Display(Name = "Last Name")]
+        public string lastName { get; set; }
 
     }
 }
