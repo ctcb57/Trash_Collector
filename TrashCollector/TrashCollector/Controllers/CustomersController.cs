@@ -14,13 +14,13 @@ namespace TrashCollector.Controllers
     {
         private ApplicationDbContext db = new ApplicationDbContext();
 
-        // GET: Customers
+        // GET: Customers1
         public ActionResult Index()
         {
             return View(db.Customer.ToList());
         }
 
-        // GET: Customers/Details/5
+        // GET: Customers1/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -35,18 +35,18 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Create
+        // GET: Customers1/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Customers/Create
+        // POST: Customers1/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerId,email,password,balance,pickupDay,streetAddress,city,state,zipCode")] Customer customer)
+        public ActionResult Create([Bind(Include = "customerId,email,password,balance,pickupDay,pickupDateSelected,individualPickupDate,streetAddress,city,state,zipCode,userRole")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -58,7 +58,7 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Edit/5
+        // GET: Customers1/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -73,12 +73,12 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Edit/5
+        // POST: Customers1/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "customerId,email,password,balance,pickupDay,streetAddress,city,state,zipCode")] Customer customer)
+        public ActionResult Edit([Bind(Include = "customerId,email,password,balance,pickupDay,pickupDateSelected,individualPickupDate,streetAddress,city,state,zipCode,userRole")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -89,7 +89,7 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        // GET: Customers/Delete/5
+        // GET: Customers1/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -104,7 +104,7 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
-        // POST: Customers/Delete/5
+        // POST: Customers1/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

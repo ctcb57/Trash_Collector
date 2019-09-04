@@ -176,13 +176,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201909031955215_InitialMigration.cs" />
-    <Compile Include="Migrations\201909031955215_InitialMigration.Designer.cs">
-      <DependentUpon>201909031955215_InitialMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201909041501030_SecondaryMigration.cs" />
-    <Compile Include="Migrations\201909041501030_SecondaryMigration.Designer.cs">
-      <DependentUpon>201909041501030_SecondaryMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201909042055201_InitialMigration.cs" />
+    <Compile Include="Migrations\201909042055201_InitialMigration.Designer.cs">
+      <DependentUpon>201909042055201_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -249,17 +245,17 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\Customers\Create.cshtml" />
-    <Content Include="Views\Customers\Delete.cshtml" />
-    <Content Include="Views\Customers\Details.cshtml" />
-    <Content Include="Views\Customers\Edit.cshtml" />
-    <Content Include="Views\Customers\Index.cshtml" />
     <Content Include="Views\Employees\Create.cshtml" />
     <Content Include="Views\Employees\Delete.cshtml" />
     <Content Include="Views\Employees\Details.cshtml" />
     <Content Include="Views\Employees\Edit.cshtml" />
     <Content Include="Views\Employees\Index.cshtml" />
     <Content Include="Views\Role\AddRole.cshtml" />
+    <Content Include="Views\Customers\Create.cshtml" />
+    <Content Include="Views\Customers\Delete.cshtml" />
+    <Content Include="Views\Customers\Details.cshtml" />
+    <Content Include="Views\Customers\Edit.cshtml" />
+    <Content Include="Views\Customers\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -278,11 +274,8 @@
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201909031955215_InitialMigration.resx">
-      <DependentUpon>201909031955215_InitialMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201909041501030_SecondaryMigration.resx">
-      <DependentUpon>201909041501030_SecondaryMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201909042055201_InitialMigration.resx">
+      <DependentUpon>201909042055201_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

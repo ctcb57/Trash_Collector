@@ -10,6 +10,10 @@ namespace TrashCollector.Models
     {
         [Key]
         public int customerId { get; set; }
+        [Display(Name ="First Name")]
+        public string firstName { get; set; }
+        [Display(Name = "Last Name")]
+        public string lastName { get; set; }
         [Display(Name = "Email")]
         public string email { get; set; }
         [Display(Name = "Password")]
@@ -30,6 +34,8 @@ namespace TrashCollector.Models
         public string state { get; set; }
         [Display(Name = "Zip Code")]
         public int zipCode { get; set; }
+        [Display(Name = "User Role")]
+        public string userRole { get; set; }
 
     }
 }
