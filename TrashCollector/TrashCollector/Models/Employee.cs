@@ -17,9 +17,10 @@ namespace TrashCollector.Models
         public string firstName { get; set; }
         [Display(Name = "Last Name")]
         public string lastName { get; set; }
-        [Key, ForeignKey("ApplicationUser")]
-        public string Id { get; set; }
-        public virtual ApplicationUser ApplicationUser { get; set; }
+
+        [ForeignKey("ApplicationUser")]
+        public string ApplicationUserId { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
     }
 }
