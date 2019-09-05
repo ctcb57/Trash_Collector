@@ -47,7 +47,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,individualPickupDate,streetAddress,city,zipCode,ApplicationUserId")] Customer customer)
+        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -57,7 +57,6 @@ namespace TrashCollector.Controllers
                 customer.ApplicationUserId = currentUser;
                 customer.balance = 0.00;
                 customer.pickupDateSelected = false;
-                customer.individualPickupDate = "none";
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
