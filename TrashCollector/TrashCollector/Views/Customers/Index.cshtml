@@ -7,6 +7,9 @@
 <h2>Customer Home Page</h2>
 <br />
 <h4>Your account details are listed below</h4>
+<br />
+<p>Click the link in the table below to update account information or select a one-time pickup</p>
+<br />
 
 <table class="table">
     <tr>
@@ -41,9 +44,7 @@
                 @Html.DisplayFor(modelItem => item.pickupDay)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.customerId }) |
-                @Html.ActionLink("Details", "Details", new { id = item.customerId }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.customerId })
+                @Html.ActionLink("Update Account", "Edit", new { id = item.customerId })
             </td>
         </tr>
     }
