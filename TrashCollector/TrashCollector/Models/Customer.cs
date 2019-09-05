@@ -22,6 +22,7 @@ namespace TrashCollector.Models
         [Display(Name = "Pickup Date Selected?")]
         public bool pickupDateSelected { get; set; }
         [Display(Name = "One-Time Pickup Date")]
+        [DataType(DataType.Date)]
         public DateTime? Date { get; set; }
         [Display(Name = "Street Address")]
         public string streetAddress { get; set; }
@@ -30,8 +31,10 @@ namespace TrashCollector.Models
         [Display(Name = "Zip Code")]
         public int zipCode { get; set; }
         [Display(Name = "Account Suspension Start Date")]
+        [DataType(DataType.Date)]
         public DateTime? AccountSuspensionStartDate { get; set; }
         [Display(Name = "Account Suspension End Date")]
+        [DataType(DataType.Date)]
         public DateTime? AccountSuspensionEndDate { get; set; }
         [Display(Name = "User Role")]
 

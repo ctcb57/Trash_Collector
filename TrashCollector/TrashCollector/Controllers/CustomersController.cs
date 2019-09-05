@@ -87,8 +87,10 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "customerId,email,password,balance,pickupDay,pickupDateSelected,individualPickupDate,streetAddress,city,state,zipCode,AccountSuspensionStartDate,AccountSuspensionEndDate")] Customer customer)
+        public ActionResult Edit([Bind(Include = "customerId,firstName,lastName,streetAddress,city,zipCode,pickupDay,Date,AccountSuspensionStartDate,AccountSuspensionEndDate,ApplicationUserId")] Customer customer)
         {
+            var currentUser = User.Identity.GetUserId();
+            customer.ApplicationUserId = currentUser;
             if (ModelState.IsValid)
             {
                 db.Entry(customer).State = EntityState.Modified;
