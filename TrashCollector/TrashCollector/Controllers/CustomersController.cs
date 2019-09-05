@@ -48,17 +48,17 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId")] Customer customer)
+        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 var currentUser = User.Identity.GetUserId();
-                //var currentCustomer = db.Customer.Select(c => c.ApplicationUserId);
-                //var idToAdd = db.Customer.Where(c => c.ApplicationUserId == currentUser);
                 customer.ApplicationUserId = currentUser;
                 customer.balance = 0.00;
                 customer.pickupDateSelected = false;
-                customer.Date = DateTime.Now;
+                customer.Date = null;
+                customer.AccountSuspensionStartDate = null;
+                customer.AccountSuspensionEndDate = null;
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -87,7 +87,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "customerId,email,password,balance,pickupDay,pickupDateSelected,individualPickupDate,streetAddress,city,state,zipCode,userRole")] Customer customer)
+        public ActionResult Edit([Bind(Include = "customerId,email,password,balance,pickupDay,pickupDateSelected,individualPickupDate,streetAddress,city,state,zipCode,AccountSuspensionStartDate,AccountSuspensionEndDate")] Customer customer)
         {
             if (ModelState.IsValid)
             {
