@@ -31,8 +31,10 @@ namespace TrashCollector.Models
         public int zipCode { get; set; }
         [Display(Name = "User Role")]
 
-        [ForeignKey]
-        public int userId { get; set; }
+        [Key, ForeignKey("ApplicationUser")]
+        public string Id { get; set; }
+        public virtual ApplicationUser ApplicationUser { get; set; }
+
 
     }
 }
