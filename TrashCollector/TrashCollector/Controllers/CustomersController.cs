@@ -18,7 +18,8 @@ namespace TrashCollector.Controllers
         // GET: Customers1
         public ActionResult Index()
         {
-            return View(db.Customer.ToList());
+            var currentUser = User.Identity.GetUserId();
+            return View(db.Customer.Where(c => c.ApplicationUserId == currentUser));
         }
 
         // GET: Customers1/Details/5
@@ -57,6 +58,7 @@ namespace TrashCollector.Controllers
                 customer.ApplicationUserId = currentUser;
                 customer.balance = 0.00;
                 customer.pickupDateSelected = false;
+                customer.Date = DateTime.Now;
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");

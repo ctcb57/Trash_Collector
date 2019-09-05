@@ -4,15 +4,23 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Customer Home Page</h2>
+<br />
+<h4>Your account details are listed below</h4>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.zipCode)
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.balance)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pickupDay)
         </th>
         <th></th>
     </tr>
@@ -21,7 +29,16 @@
     {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.zipCode)
+                @Html.DisplayFor(modelItem => item.firstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.lastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItme => item.balance)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.pickupDay)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { id = item.customerId }) |
