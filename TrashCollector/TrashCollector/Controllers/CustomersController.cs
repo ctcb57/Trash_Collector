@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -50,6 +51,13 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUser = User.Identity.GetUserId();
+                //var currentCustomer = db.Customer.Select(c => c.ApplicationUserId);
+                //var idToAdd = db.Customer.Where(c => c.ApplicationUserId == currentUser);
+                customer.ApplicationUserId = currentUser;
+                customer.balance = 0.00;
+                customer.pickupDateSelected = false;
+                customer.individualPickupDate = "none";
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");

@@ -11,7 +11,7 @@ namespace TrashCollector.Models
     {
         [Key]
         public int employeeId { get; set; }
-        [Display(Name = "Email")]
+        [Display(Name = "Zip Code")]
         public int zipCode { get; set; }
         [Display(Name = "First Name")]
         public string firstName { get; set; }
