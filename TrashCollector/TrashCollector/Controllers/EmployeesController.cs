@@ -49,8 +49,20 @@ namespace TrashCollector.Controllers
             var customerZipAndDayMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == searchString).ToList();
             return View(customerZipAndDayMatch);
         }
+        // GET: Employees/ConfirmPickup
+        public ActionResult ConfirmPickup(int id)
+        {
+            var customerToConfirm = db.Customer.FirstOrDefault(c => c.customerId == id);
+            return View(customerToConfirm);
+        }
 
+        //POST: Employees/ConfirmPickup
+       [HttpPost]
+       [ValidateAntiForgeryToken]
+        public ActionResult ConfirmPickup(Customer customer)
+        {
 
+        }
 
         // GET: Employees/Create
         public ActionResult Create()

@@ -1,0 +1,52 @@
+﻿@model TrashCollector.Models.Customer
+
+@{
+    ViewBag.Title = "ConfirmPickup";
+}
+
+<h2>Would you like to confirm trash has been collected from this address?</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.streetAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zipCode)
+        </th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.streetAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.city)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.zipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.pickupDay)
+        </td>
+    </tr>
+
+    
+
+</table>
+
+<h4>Click submit to confirm or click return to return to the previous page</h4>
+
+<div class="form-group">
+    <div class="col-md-offset-2 col-md-10">
+        <input type="submit" value="Yes" class="btn btn-default" />
+    </div>
+</div>
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
