@@ -23,18 +23,13 @@ namespace TrashCollector.Controllers
         }
 
         // GET: Employees/Details/5
-        public ActionResult Details(int? id)
+        public ActionResult Details()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            Employee employee = db.Employee.Find(id);
-            if (employee == null)
-            {
-                return HttpNotFound();
-            }
-            return View(employee);
+            var employeeId = User.Identity.GetUserId();
+            var currentEmployee = db.Employee.Where(e => e.ApplicationUserId == employeeId).Single();
+            var dateToday = DateTime.Now.DayOfWeek.ToString();
+            var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == dateToday).ToList();
+            return View(customerZipCodeMatch);
         }
 
         // GET: Employees/Create
@@ -52,6 +47,8 @@ namespace TrashCollector.Controllers
         {
             if (ModelState.IsValid)
             {
+                var currentUser = User.Identity.GetUserId();
+                employee.ApplicationUserId = currentUser;
                 db.Employee.Add(employee);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -80,7 +77,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "employeeId,email,password,zipCode")] Employee employee)
+        public ActionResult Edit([Bind(Include = "employeeId,firstName,lastName,zipCode,ApplicationUserId")] Employee employee)
         {
             if (ModelState.IsValid)
             {

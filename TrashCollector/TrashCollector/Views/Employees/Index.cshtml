@@ -3,12 +3,10 @@
 @{
     ViewBag.Title = "Index";
 }
-
 <h2>Employee Home Page</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+<h4>Your account details are listed below</h4>
+
 <table class="table">
     <tr>
         <th>
@@ -23,7 +21,8 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.firstName)
@@ -35,9 +34,11 @@
             @Html.DisplayFor(modelItem => item.zipCode)
         </td>
         <td>
-            @Html.ActionLink("Update Account", "Edit", new { id=item.employeeId }) 
+            @Html.ActionLink("Update Account", "Edit", new { id = item.employeeId }) 
         </td>
+        @Html.HiddenFor(modelItem => item.employeeId)
     </tr>
 }
 
 </table>
+  
