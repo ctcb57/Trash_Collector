@@ -30,7 +30,9 @@ namespace TrashCollector.Controllers
             var dayOfWeekToday = DateTime.Now.DayOfWeek.ToString();
             var dateToday = DateTime.Now;
             var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == dayOfWeekToday || c.Date == dateToday).ToList();
-            return View(customerZipCodeMatch);
+            var customerSuspensionRemoved = customerZipCodeMatch.Where(c => (c.AccountSuspensionStartDate > dateToday && c.AccountSuspensionEndDate < dateToday)
+            || (c.AccountSuspensionEndDate == null && c.AccountSuspensionStartDate == null)).ToList();
+            return View(customerSuspensionRemoved);
         }
 
         // GET: Employees/AllCustomers
@@ -75,6 +77,7 @@ namespace TrashCollector.Controllers
                 return View();
             }
         }
+
 
         // GET: Employees/Create
         public ActionResult Create()
