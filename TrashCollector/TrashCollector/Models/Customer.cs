@@ -17,6 +17,8 @@ namespace TrashCollector.Models
         public string lastName { get; set; }
         [Display(Name = "Balance")]
         public double balance { get; set; }
+        [Display(Name = "Pickup Confirmation")]
+        public bool pickupConfirmed { get; set; }
         [Display(Name = "Pickup Day")]
         public string pickupDay { get; set; }
         [Display(Name = "Pickup Date Selected?")]
