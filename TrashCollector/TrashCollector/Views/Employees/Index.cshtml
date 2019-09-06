@@ -35,6 +35,7 @@
         </td>
         <td>
             @Html.ActionLink("Update Account", "Edit", new { id = item.employeeId }) 
+            @Html.ActionLink("Today's Pickups", "Details")
         </td>
         @Html.HiddenFor(modelItem => item.employeeId)
     </tr>

@@ -27,9 +27,27 @@ namespace TrashCollector.Controllers
         {
             var employeeId = User.Identity.GetUserId();
             var currentEmployee = db.Employee.Where(e => e.ApplicationUserId == employeeId).Single();
-            var dateToday = DateTime.Now.DayOfWeek.ToString();
-            var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == dateToday).ToList();
+            var dayOfWeekToday = DateTime.Now.DayOfWeek.ToString();
+            var dateToday = DateTime.Now;
+            var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == dayOfWeekToday || c.Date == dateToday).ToList();
             return View(customerZipCodeMatch);
+        }
+
+        // GET: Employees/AllCustomers
+        public ActionResult AllCustomers()
+        {
+            var employeeId = User.Identity.GetUserId();
+            var currentEmployee = db.Employee.Where(e => e.ApplicationUserId == employeeId).Single();
+            var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode).ToList();
+            return View(customerZipCodeMatch);
+        }
+        // GET: Employees/PickupSchedule
+        public ActionResult PickupSchedule(string searchString)
+        {
+            var employeeId = User.Identity.GetUserId();
+            var currentEmployee = db.Employee.Where(e => e.ApplicationUserId == employeeId).Single();
+            var customerZipAndDayMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == searchString).ToList();
+            return View(customerZipAndDayMatch);
         }
 
         // GET: Employees/Create
