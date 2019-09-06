@@ -59,9 +59,21 @@ namespace TrashCollector.Controllers
         //POST: Employees/ConfirmPickup
        [HttpPost]
        [ValidateAntiForgeryToken]
-        public ActionResult ConfirmPickup(Customer customer)
+        public ActionResult ConfirmPickup([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed")]Customer customer)
         {
-
+            try
+            {
+                double weeklyTrashCharge = 10.00;
+                customer.balance += weeklyTrashCharge;
+                customer.pickupConfirmed = true;
+                db.Entry(customer).State = EntityState.Modified;
+                db.SaveChanges();
+                return RedirectToAction("Details");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: Employees/Create

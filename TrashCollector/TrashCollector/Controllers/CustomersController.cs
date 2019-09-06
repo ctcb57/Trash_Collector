@@ -48,7 +48,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected")] Customer customer)
+        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -60,6 +60,7 @@ namespace TrashCollector.Controllers
                 customer.AccountSuspensionStartDate = null;
                 customer.AccountSuspensionEndDate = null;
                 customer.pickupDateSelected = false;
+                customer.pickupConfirmed = false;
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");
