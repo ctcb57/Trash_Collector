@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -17,7 +18,8 @@ namespace TrashCollector.Controllers
         // GET: Employees
         public ActionResult Index()
         {
-            return View(db.Employee.ToList());
+            var currentUser = User.Identity.GetUserId();
+            return View(db.Employee.Where(e => e.ApplicationUserId == currentUser));
         }
 
         // GET: Employees/Details/5
