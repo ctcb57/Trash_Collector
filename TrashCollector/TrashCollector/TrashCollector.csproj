@@ -261,6 +261,7 @@
     <Content Include="Views\Employees\PickupSchedule.cshtml" />
     <Content Include="Views\Employees\AllCustomers.cshtml" />
     <Content Include="Views\Employees\ConfirmPickup.cshtml" />
+    <Content Include="Views\Employees\CompleteDay.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

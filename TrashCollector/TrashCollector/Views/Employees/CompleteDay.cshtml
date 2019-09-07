@@ -1,0 +1,25 @@
+﻿@model IEnumerable<TrashCollector.Models.Customer>
+
+@{
+    ViewBag.Title = "CompleteDay";
+}
+
+<h4>Click complete to confirm you have completed all trash pickups scheduled for today</h4>
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Complete" class="btn btn-default" />
+        </div>
+    </div>
+}
+<br />
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
+

@@ -22,8 +22,9 @@ namespace TrashCollector.Controllers
             return View(db.Employee.Where(e => e.ApplicationUserId == currentUser));
         }
 
-        // GET: Employees/Details/5
-        public ActionResult Details()
+        // Method to retrieve customers scheduled for current day
+
+        public List<Customer> GetCurrentDayCustomers()
         {
             var employeeId = User.Identity.GetUserId();
             var currentEmployee = db.Employee.Where(e => e.ApplicationUserId == employeeId).Single();
@@ -32,7 +33,13 @@ namespace TrashCollector.Controllers
             var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == dayOfWeekToday || c.Date == dateToday).ToList();
             var customerSuspensionRemoved = customerZipCodeMatch.Where(c => (c.AccountSuspensionStartDate > dateToday && c.AccountSuspensionEndDate < dateToday)
             || (c.AccountSuspensionEndDate == null && c.AccountSuspensionStartDate == null)).ToList();
-            return View(customerSuspensionRemoved);
+            return customerSuspensionRemoved;
+        }
+
+        // GET: Employees/Details/5
+        public ActionResult Details()
+        {
+            return View(GetCurrentDayCustomers());
         }
 
         // GET: Employees/AllCustomers
@@ -78,6 +85,28 @@ namespace TrashCollector.Controllers
             }
         }
 
+        //GET: Employees/Complete Day
+        public ActionResult CompleteDay()
+        {
+            var dailyCustomers = GetCurrentDayCustomers();
+            return View(dailyCustomers);
+        }
+
+        //POST: Employees/Complete Day
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CompleteDay(List<Customer> customers)
+        {
+            customers = GetCurrentDayCustomers();
+            var customersCompletedPickups = customers.Where(c => c.pickupConfirmed == true);
+            customers = customersCompletedPickups.Select(c => { c.pickupConfirmed = false; return c; }).ToList();
+            foreach(var item in customers)
+            {
+                db.Entry(item).State = EntityState.Modified;
+            }
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
 
         // GET: Employees/Create
         public ActionResult Create()
