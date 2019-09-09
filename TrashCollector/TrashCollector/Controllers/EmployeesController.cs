@@ -88,7 +88,14 @@ namespace TrashCollector.Controllers
         //GET: Employees/Complete Day
         public ActionResult CompleteDay()
         {
+            var currentUser = User.Identity.GetUserId();
+            var currentEmployee = db.Employee.FirstOrDefault(e => e.ApplicationUserId == currentUser);
             var dailyCustomers = GetCurrentDayCustomers();
+            foreach(var customer in dailyCustomers)
+            {
+                PickupTracker newPickupListings = new PickupTracker();
+                CreatePickupListing(newPickupListings, customer, currentEmployee);
+            }
             return View(dailyCustomers);
         }
 
@@ -106,6 +113,25 @@ namespace TrashCollector.Controllers
             }
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public void CreatePickupListing([Bind(Include = "pickupDate,employeeId,customerId")]PickupTracker pickupTracker, Customer customer, Employee employee)
+        {
+            var customerToConfirm = customer.customerId;
+            var employeeToConfirm = employee.employeeId;
+            var dateOfConfirmation = DateTime.Now.Date;
+            pickupTracker.pickupDate = dateOfConfirmation;
+            pickupTracker.customerId = customerToConfirm;
+            pickupTracker.employeeId = employeeToConfirm;
+            db.PickupTracker.Add(pickupTracker);
+            db.SaveChanges();
+        }
+
+        // GET: Employees/PickupListing
+
+        public ActionResult PickupListing()
+        {
+            return View();
         }
 
         // GET: Employees/Create

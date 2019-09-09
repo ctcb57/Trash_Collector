@@ -1,0 +1,45 @@
+﻿@model IEnumerable<TrashCollector.Models.PickupTracker>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Employee.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.pickupDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Employee.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.pickupDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.pickupId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.pickupId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.pickupId })
+        </td>
+    </tr>
+}
+
+</table>
