@@ -72,6 +72,10 @@ namespace TrashCollector.Controllers
         {
             try
             {
+                var currentUser = User.Identity.GetUserId();
+                var currentEmployee = db.Employee.FirstOrDefault(e => e.ApplicationUserId == currentUser);
+                PickupTracker newPickupListings = new PickupTracker();
+                CreatePickupListing(newPickupListings, customer, currentEmployee);
                 double weeklyTrashCharge = 10.00;
                 customer.balance += weeklyTrashCharge;
                 customer.pickupConfirmed = true;
@@ -88,14 +92,7 @@ namespace TrashCollector.Controllers
         //GET: Employees/Complete Day
         public ActionResult CompleteDay()
         {
-            var currentUser = User.Identity.GetUserId();
-            var currentEmployee = db.Employee.FirstOrDefault(e => e.ApplicationUserId == currentUser);
             var dailyCustomers = GetCurrentDayCustomers();
-            foreach(var customer in dailyCustomers)
-            {
-                PickupTracker newPickupListings = new PickupTracker();
-                CreatePickupListing(newPickupListings, customer, currentEmployee);
-            }
             return View(dailyCustomers);
         }
 
@@ -127,12 +124,12 @@ namespace TrashCollector.Controllers
             db.SaveChanges();
         }
 
-        // GET: Employees/PickupListing
-
         public ActionResult PickupListing()
         {
-            return View();
+            var listings = db.PickupTracker.Include(c => c.Customer).Include(c => c.Employee);
+            return View(listings);
         }
+
 
         // GET: Employees/Create
         public ActionResult Create()

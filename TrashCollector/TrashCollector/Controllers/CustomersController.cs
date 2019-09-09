@@ -37,6 +37,18 @@ namespace TrashCollector.Controllers
             return View(customer);
         }
 
+        //public List<Customer> PickupTrackerCustomerInformation()
+        //{
+        //    List<Customer> trackerCustomers = new List<Customer>();
+        //    var tracker = db.PickupTracker;
+        //    foreach (var listing in tracker)
+        //    {
+        //        var customerToAdd = db.Customer.FirstOrDefault(e => e.customerId == listing.customerId);
+        //        trackerCustomers.Add(customerToAdd);
+        //    }
+        //    return trackerCustomers;
+        //}
+
         // GET: Customers1/Create
         public ActionResult Create()
         {
