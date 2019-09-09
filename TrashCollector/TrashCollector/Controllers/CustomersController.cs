@@ -8,6 +8,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using TrashCollector.Models;
+using Newtonsoft.Json;
 
 namespace TrashCollector.Controllers
 {
@@ -36,18 +37,19 @@ namespace TrashCollector.Controllers
             }
             return View(customer);
         }
+        public string ConvertAddressToGoogleFormat(Customer customer)
+        {
+            string googleFormatAddress = customer.streetAddress + "," + customer.city + ",KS," + customer.zipCode + ",USA";
+            return googleFormatAddress;
+        }
 
-        //public List<Customer> PickupTrackerCustomerInformation()
-        //{
-        //    List<Customer> trackerCustomers = new List<Customer>();
-        //    var tracker = db.PickupTracker;
-        //    foreach (var listing in tracker)
-        //    {
-        //        var customerToAdd = db.Customer.FirstOrDefault(e => e.customerId == listing.customerId);
-        //        trackerCustomers.Add(customerToAdd);
-        //    }
-        //    return trackerCustomers;
-        //}
+        public GeoCode GeoLocate(string address)
+        {
+            var requestUrl = $"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key=AIzaSyCvNx58z28nAtRCUDGJU6xi2qisdrmE1dQ";
+            var result = new WebClient().DownloadString(requestUrl);
+            GeoCode geocode = JsonConvert.DeserializeObject<GeoCode>(result);
+            return geocode;
+        }
 
         // GET: Customers1/Create
         public ActionResult Create()
@@ -60,7 +62,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed")] Customer customer)
+        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed,longitude,latitude")] Customer customer)
         {
             if (ModelState.IsValid)
             {
@@ -73,6 +75,10 @@ namespace TrashCollector.Controllers
                 customer.AccountSuspensionEndDate = null;
                 customer.pickupDateSelected = false;
                 customer.pickupConfirmed = false;
+                string addressToConvert = ConvertAddressToGoogleFormat(customer);
+                var geoLocate = GeoLocate(addressToConvert);
+                customer.longitute = geoLocate.results[0].geometry.location.lng;
+                customer.latitude = geoLocate.results[0].geometry.location.lat;
                 db.Customer.Add(customer);
                 db.SaveChanges();
                 return RedirectToAction("Index");

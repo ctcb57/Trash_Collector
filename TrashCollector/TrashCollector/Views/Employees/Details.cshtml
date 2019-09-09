@@ -51,6 +51,9 @@
                 @Html.DisplayFor(modelItem => item.pickupConfirmed)
             </td>
             <td>
+                @Html.ActionLink("Customer Details", "CustomerDetails", new { id = item.customerId }) |
+            </td>
+            <td>
                 @Html.ActionLink("Confirm Pickup", "ConfirmPickup", new { id = item.customerId })
             </td>
         </tr>

@@ -1,0 +1,74 @@
+﻿@model TrashCollector.Models.Customer
+
+@{
+    ViewBag.Title = "CustomerDetails";
+}
+
+<h2>CustomerDetails</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.firstName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lastName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.streetAddress)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.city)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.zipCode)
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.lastName)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.streetAddress)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.city)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.zipCode)
+        </td>
+    </tr>
+</table>
+
+<html>
+    <head>
+        <style>
+            #map {
+                width: 100%;
+                height: 400px;
+                background-color: grey;
+            }
+        </style>
+    </head>
+    <body>
+        <h3>Customer Map</h3>
+        @*Div element for the map*@
+        <div id="map"></div>
+        <script>
+            function initMap() {
+                var uluru = { lat: -25.344, lng: 131.036 };
+                var map = new google.maps.Map(
+                    document.getElementById('map'), { zoom: 4, center: uluru });
+                var marker = new google.maps.Marker({ position: uluru, map: map });
+            }
+        </script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCvNx58z28nAtRCUDGJU6xi2qisdrmE1dQ&callback=initMap">
+        </script>
+    </body>
+</html>

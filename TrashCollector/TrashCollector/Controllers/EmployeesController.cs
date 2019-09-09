@@ -6,8 +6,17 @@ using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Net;
 using System.Web;
+using System.IO;
+using System.Text;
 using System.Web.Mvc;
 using TrashCollector.Models;
+using System.Xml.Linq;
+using System.Web.Script;
+using System.Configuration;
+using Nest;
+using System.Web.Script.Serialization;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 
 namespace TrashCollector.Controllers
 {
@@ -58,6 +67,14 @@ namespace TrashCollector.Controllers
             var customerZipAndDayMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == searchString).ToList();
             return View(customerZipAndDayMatch);
         }
+        // GET: Employees/CustomerDetails
+        public ActionResult CustomerDetails(int id)
+        {
+            var customerQuery = db.Customer.FirstOrDefault(c => c.customerId == id);
+            return View(customerQuery);
+        }
+
+
         // GET: Employees/ConfirmPickup
         public ActionResult ConfirmPickup(int id)
         {

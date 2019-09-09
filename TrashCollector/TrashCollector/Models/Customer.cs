@@ -28,6 +28,8 @@ namespace TrashCollector.Models
         public DateTime? Date { get; set; }
         [Display(Name = "Street Address")]
         public string streetAddress { get; set; }
+        public double longitute { get; set; }
+        public double latitude { get; set; }
         [Display(Name = "City")]
         public string city { get; set; }
         [Display(Name = "Zip Code")]
