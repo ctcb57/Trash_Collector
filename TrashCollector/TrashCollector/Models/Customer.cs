@@ -21,11 +21,9 @@ namespace TrashCollector.Models
         public bool pickupConfirmed { get; set; }
         [Display(Name = "Pickup Day")]
         public string pickupDay { get; set; }
-        [Display(Name = "Pickup Date Selected?")]
-        public bool pickupDateSelected { get; set; }
         [Display(Name = "One-Time Pickup Date")]
         [DataType(DataType.Date)]
-        public DateTime? Date { get; set; }
+        public DateTime? specialPickupDate { get; set; }
         [Display(Name = "Street Address")]
         public string streetAddress { get; set; }
         public double longitute { get; set; }
@@ -34,6 +32,8 @@ namespace TrashCollector.Models
         public string city { get; set; }
         [Display(Name = "Zip Code")]
         public int zipCode { get; set; }
+        [Display(Name = "State Abbreviation")]
+        public string stateAbbreviation { get; set; }
         [Display(Name = "Account Suspension Start Date")]
         [DataType(DataType.Date)]
         public DateTime? AccountSuspensionStartDate { get; set; }

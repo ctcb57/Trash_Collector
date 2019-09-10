@@ -39,7 +39,7 @@ namespace TrashCollector.Controllers
             var currentEmployee = db.Employee.Where(e => e.ApplicationUserId == employeeId).Single();
             var dayOfWeekToday = DateTime.Now.DayOfWeek.ToString();
             var dateToday = DateTime.Now;
-            var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == dayOfWeekToday || c.Date == dateToday).ToList();
+            var customerZipCodeMatch = db.Customer.Where(c => c.zipCode == currentEmployee.zipCode && c.pickupDay == dayOfWeekToday || c.specialPickupDate == dateToday).ToList();
             var customerSuspensionRemoved = customerZipCodeMatch.Where(c => (c.AccountSuspensionStartDate > dateToday && c.AccountSuspensionEndDate < dateToday)
             || (c.AccountSuspensionEndDate == null && c.AccountSuspensionStartDate == null)).ToList();
             return customerSuspensionRemoved;

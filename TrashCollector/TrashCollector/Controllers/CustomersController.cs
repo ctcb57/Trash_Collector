@@ -39,7 +39,7 @@ namespace TrashCollector.Controllers
         }
         public string ConvertAddressToGoogleFormat(Customer customer)
         {
-            string googleFormatAddress = customer.streetAddress + "," + customer.city + ",KS," + customer.zipCode + ",USA";
+            string googleFormatAddress = customer.streetAddress + "," + customer.city + "," + customer.stateAbbreviation + "," + customer.zipCode + ",USA";
             return googleFormatAddress;
         }
 
@@ -62,18 +62,16 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed,longitude,latitude")] Customer customer)
+        public ActionResult Create([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,speicalPickupDate,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed,longitude,latitude,stateAbbreviation")] Customer customer)
         {
             if (ModelState.IsValid)
             {
                 var currentUser = User.Identity.GetUserId();
                 customer.ApplicationUserId = currentUser;
                 customer.balance = 0.00;
-                customer.pickupDateSelected = false;
-                customer.Date = null;
+                customer.specialPickupDate = null;
                 customer.AccountSuspensionStartDate = null;
                 customer.AccountSuspensionEndDate = null;
-                customer.pickupDateSelected = false;
                 customer.pickupConfirmed = false;
                 string addressToConvert = ConvertAddressToGoogleFormat(customer);
                 var geoLocate = GeoLocate(addressToConvert);
@@ -107,10 +105,14 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "customerId,firstName,lastName,streetAddress,city,zipCode,pickupDay,Date,AccountSuspensionStartDate,AccountSuspensionEndDate,ApplicationUserId")] Customer customer)
+        public ActionResult Edit([Bind(Include = "customerId,firstName,lastName,streetAddress,city,zipCode,pickupDay,speicalPickupDate,AccountSuspensionStartDate,AccountSuspensionEndDate,ApplicationUserId,longitute,latitude,stateAbbreviation")] Customer customer)
         {
             if (ModelState.IsValid)
             {
+                string addressToConvert = ConvertAddressToGoogleFormat(customer);
+                var geoLocate = GeoLocate(addressToConvert);
+                customer.longitute = geoLocate.results[0].geometry.location.lng;
+                customer.latitude = geoLocate.results[0].geometry.location.lat;
                 db.Entry(customer).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");

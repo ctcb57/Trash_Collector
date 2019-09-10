@@ -56,6 +56,14 @@
     </div>
 
     <div class="form-group">
+        @Html.LabelFor(model => model.stateAbbreviation, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.stateAbbreviation, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.stateAbbreviation, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
         @Html.LabelFor(model => model.pickupDay, new { @class = "col-md-2 control-label" })
         <div class="col-md-10">
             @Html.DropDownList("pickupDay", new SelectList(Enum.GetValues(typeof(DayOfWeek))), "Select Pickup Day", new { @class = "form-control" })
