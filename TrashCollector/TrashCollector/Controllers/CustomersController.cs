@@ -37,6 +37,20 @@ namespace TrashCollector.Controllers
             }
             return View(customer);
         }
+
+        public ActionResult AccountDetails(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Customer customer = db.Customer.Find(id);
+            if (customer == null)
+            {
+                return HttpNotFound();
+            }
+            return View(customer);
+        }
         public string ConvertAddressToGoogleFormat(Customer customer)
         {
             string googleFormatAddress = customer.streetAddress + "," + customer.city + "," + customer.stateAbbreviation + "," + customer.zipCode + ",USA";

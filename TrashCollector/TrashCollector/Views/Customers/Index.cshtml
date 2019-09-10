@@ -45,7 +45,10 @@
                 @Html.DisplayFor(modelItem => item.pickupDay)
             </td>
             <td>
-                @Html.ActionLink("Update Account", "Edit", new { id = item.customerId })
+                @Html.ActionLink("Update Account", "Edit", new { id = item.customerId })           
+            </td>
+            <td>
+                @Html.ActionLink("Account Details", "AccountDetails", new { id = item.customerId})
             </td>
         </tr>
     }
