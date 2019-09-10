@@ -51,6 +51,15 @@ namespace TrashCollector.Controllers
             }
             return View(customer);
         }
+
+        public ActionResult PickupHistory()
+        {
+            var currentId = User.Identity.GetUserId();
+            var currentUser = db.Customer.FirstOrDefault(c => c.ApplicationUserId == currentId);
+            var currentCustomerId = currentUser.customerId;
+            var listings = db.PickupTracker.Where(c => c.customerId == currentCustomerId).Include(c => c.Customer).Include(c => c.Employee);
+            return View(listings);
+        }
         public string ConvertAddressToGoogleFormat(Customer customer)
         {
             string googleFormatAddress = customer.streetAddress + "," + customer.city + "," + customer.stateAbbreviation + "," + customer.zipCode + ",USA";
