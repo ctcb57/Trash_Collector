@@ -85,7 +85,7 @@ namespace TrashCollector.Controllers
         //POST: Employees/ConfirmPickup
        [HttpPost]
        [ValidateAntiForgeryToken]
-        public ActionResult ConfirmPickup([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed")]Customer customer)
+        public ActionResult ConfirmPickup([Bind(Include = "customerId,firstName,lastName,balance,pickupDay,pickupDateSelected,Date,streetAddress,city,zipCode,ApplicationUserId,AccountSuspensionStartDate,AccountSuspensionEndDate,pickupDateSelected,pickupConfirmed,longitute,latitude")]Customer customer)
         {
             try
             {

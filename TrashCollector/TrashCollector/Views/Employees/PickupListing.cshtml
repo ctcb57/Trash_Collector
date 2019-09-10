@@ -11,6 +11,8 @@
         <th>
             @Html.DisplayNameFor(model => model.pickupDate)
         </th>
+        <th>Customer First Name</th>
+        <th>Customer Last Name</th>
         <th>Pickup Address</th>
         <th>Employee First Name</th>
         <th>Employee Last Name</th>
@@ -20,6 +22,12 @@
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.pickupDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.firstName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Customer.lastName)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Customer.streetAddress)

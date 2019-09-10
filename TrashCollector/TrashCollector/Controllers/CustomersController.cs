@@ -119,7 +119,7 @@ namespace TrashCollector.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "customerId,firstName,lastName,streetAddress,city,zipCode,pickupDay,speicalPickupDate,AccountSuspensionStartDate,AccountSuspensionEndDate,ApplicationUserId,longitute,latitude,stateAbbreviation")] Customer customer)
+        public ActionResult Edit([Bind(Include = "customerId,firstName,lastName,streetAddress,city,zipCode,pickupDay,speicalPickupDate,AccountSuspensionStartDate,AccountSuspensionEndDate,ApplicationUserId,longitute,latitude,stateAbbreviation,balance")] Customer customer)
         {
             if (ModelState.IsValid)
             {

@@ -27,6 +27,12 @@
         <th>
             @Html.DisplayNameFor(model => model.zipCode)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountSuspensionStartDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccountSuspensionEndDate)
+        </th>
         <th></th>
     </tr>
 
@@ -49,6 +55,12 @@
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.zipCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountSuspensionStartDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountSuspensionEndDate)
         </td>
     </tr>
 }
